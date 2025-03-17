@@ -35,12 +35,12 @@ public enum TipoUF {
         TipoUF(String estadoUF) {
             this.estadoUF = estadoUF;
         }
-
+// TODO
         // Método para obter o nome completo da unidade federativa
         public String getEstadoUF() {
             return estadoUF;
         }
-
+// TODO
         // Método para buscar uma UnidadeFederativa pela sigla
         public static TipoUF fromSigla(String sigla) {
             for (TipoUF uf : TipoUF.values()) {
