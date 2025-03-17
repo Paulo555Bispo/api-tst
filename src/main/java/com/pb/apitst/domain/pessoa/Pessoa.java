@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
+import org.aspectj.bridge.IMessage;
 
 import java.util.List;
 import java.util.Objects;
@@ -39,9 +40,7 @@ public class Pessoa {
     private boolean ativo;
 
     /*Construtor padrão*/
-    public Pessoa() {
-
-    }
+    public Pessoa() {}
 
     /*Construtor criado para pegar os dados (DTO-JSON)*/
     public Pessoa(CadastrarDadosPessoa dados) {

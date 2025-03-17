@@ -35,7 +35,7 @@ public class PessoaController {
     }
 
     @GetMapping
-    public ResponseEntity<Page<ListagemDadosPessoa>> listar(@PageableDefault(size = 5, sort = {"nome"}) Pageable paginacao) {
+    public ResponseEntity<Page<ListagemDadosPessoa>> listar(@PageableDefault(size = 10, sort = {"nome"}) Pageable paginacao) {
         var page = repository.findAllByAtivoTrue(paginacao).map(ListagemDadosPessoa::new);
         return ResponseEntity.ok((Page<ListagemDadosPessoa>) page);
 
