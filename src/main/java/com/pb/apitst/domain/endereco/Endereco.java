@@ -2,22 +2,32 @@ package com.pb.apitst.domain.endereco;
 
 import com.pb.apitst.domain.pessoa.Pessoa;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Table(name = "enderecos")
 @Entity(name = "Endereco")
+@Getter
+@NoArgsConstructor
+@AllArgsConstructor
+@EqualsAndHashCode(of = "id")
 public class Endereco {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Enumerated(EnumType.STRING) private TipoLogradouro tipoLogradouro;
+    @Enumerated(EnumType.STRING)
+    private TipoLogradouro tipoLogradouro;
     private String logradouro;
     private String numero;
     private String complemento;
     private String bairro;
     private String cidade;
-    @Enumerated(EnumType.STRING) private TipoUF uf;
+    @Enumerated(EnumType.STRING)
+    private TipoUF uf;
     private String cep;
 
     @ManyToOne

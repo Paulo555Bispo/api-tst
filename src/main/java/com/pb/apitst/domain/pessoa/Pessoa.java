@@ -5,6 +5,10 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
+import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 import org.aspectj.bridge.IMessage;
 
 import java.util.List;
@@ -12,10 +16,10 @@ import java.util.Objects;
 
 @Table(name = "pessoas")
 @Entity(name = "Pessoa")
-//@Getter
-//@NoArgsConstructor
-//@AllArgsConstructor
-//@EqualsAndHashCode(of = "id")
+@Getter
+@NoArgsConstructor
+@AllArgsConstructor
+@EqualsAndHashCode(of = "id")
 public class Pessoa {
 
     @Id
@@ -26,28 +30,20 @@ public class Pessoa {
     @Column(nullable = false, unique = true)
     @Size(max = 60, min = 3)
     private String nome;
-
-/*
-    @NotBlank
     @Email
     @Size(max = 100)
     private String email;
-    */
 
-    @OneToMany(mappedBy = "pessoa",cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "pessoa", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Endereco> enderecos;
     @Column(nullable = false)
     private boolean ativo;
 
-    /*Construtor padrão*/
-    public Pessoa() {}
-
     /*Construtor criado para pegar os dados (DTO-JSON)*/
-    public Pessoa(CadastrarDadosPessoa dados) {
+    public Pessoa(CadastrarDadosPessoa dadosPessoa) {
         this.ativo = true;
-        this.nome = dados.nome();
-
-        //this.endereco = new Endereco(dados.endereco());
+        this.nome = dadosPessoa.nome();
+        this.endereco = new Endereco(dadosEndereco.endereco());
     }
 
     /*Construtor criado para pegar os dados (DTO-JSON)*/
@@ -68,7 +64,7 @@ public class Pessoa {
         this.ativo = false;
     }
 
-    // Getters
+/*    // Getters
     public Long getId() {
         return id;
     }
@@ -83,18 +79,18 @@ public class Pessoa {
 
     public boolean isAtivo() {
         return ativo;
-    }
+    }*/
 
     // EqualsAndHashCode
-    @Override
-    public boolean equals(Object o) {
-        if (o == null || getClass() != o.getClass()) return false;
-        Pessoa pessoa = (Pessoa) o;
-        return ativo == pessoa.ativo && Objects.equals(id, pessoa.id) && Objects.equals(nome, pessoa.nome);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, nome, ativo);
-    }
+///*    @Override
+//    public boolean equals(Object o) {
+//        if (o == null || getClass() != o.getClass()) return false;
+//        Pessoa pessoa = (Pessoa) o;
+//        return ativo == pessoa.ativo && Objects.equals(id, pessoa.id) && Objects.equals(nome, pessoa.nome);
+//    }
+//
+//    @Override
+//    public int hashCode() {
+//        return Objects.hash(id, nome, ativo);
+//    }*/
 }
